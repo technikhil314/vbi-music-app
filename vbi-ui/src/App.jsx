@@ -1,32 +1,22 @@
-import logo from "./logo.svg";
+import { useAuth0 } from "@auth0/auth0-react";
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useApi } from "./hooks/useApi";
+import logo from "./logo.svg";
 function App() {
-  const [data, setData] = useState();
-  useEffect(() => {
-    const demo = async () => {
-      const res = await fetch(`${process.env.REACT_APP_BASE_URL}/users`);
-      console.log(res);
-      const text = await res.text();
-      setData(text);
-    }
-    demo();
-  }, []);
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
+  console.log(isAuthenticated);
+  const { loading, error, refresh, data } = useApi(
+    `${process.env.REACT_APP_BASE_URL}/users`
+  );
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {data || "Learn React"}
-        </a>
+        <button onClick={loginWithRedirect}>
+          {!isAuthenticated && !loading && "Not authenticated"}
+          {isAuthenticated && loading && !data && "Loading..."}
+          {isAuthenticated && !loading && data && data.message}
+        </button>
       </header>
     </div>
   );
