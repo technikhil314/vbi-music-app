@@ -5,9 +5,7 @@ import logo from "./logo.svg";
 function App() {
   const { isAuthenticated, loginWithRedirect } = useAuth0();
   console.log(isAuthenticated);
-  const { loading, error, refresh, data } = useApi(
-    `${process.env.REACT_APP_BASE_URL}/users`
-  );
+  const { loading, data } = useApi(`${process.env.REACT_APP_BASE_URL}/users`);
   return (
     <div className="App">
       <header className="App-header">
