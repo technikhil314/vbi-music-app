@@ -2,7 +2,7 @@ name: deploy_frontend
 
 on:
   push:
-    branches: 
+    branches:
       - main
 
 jobs:
@@ -21,7 +21,10 @@ jobs:
       - name: Build
         run: |
           cd vbi-ui
-          echo REACT_APP_BASE_URL=https://visual-bi-music-app.herokuapp.com > .env
+          echo "REACT_APP_BASE_URL=https://visual-bi-music-app.herokuapp.com" > .env
+          echo "REACT_APP_AUTH0_AUD_URL=https://visual-bi-music-app.herokuapp.com" >> .env
+          echo "REACT_APP_AUTH0_DOMAIN=nikhil-001mehta.auth0.com" >> .env
+          echo "REACT_APP_AUTH0_CLIENT_ID=9tZMuPN4U302UqDKHjV64vRX4yns1BFR" >> .env
           yarn --frozen-lockfile
           yarn build
 
