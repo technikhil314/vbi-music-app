@@ -1,10 +1,10 @@
 
 let express = require('express');
 let router = express.Router();
-const { createDemo } = require("../models/users");
+const { create: createUser } = require("../models/users");
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-  createDemo();
+  createUser();
   res.send('respond with a resource');
 });
 
