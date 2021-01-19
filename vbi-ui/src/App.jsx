@@ -3,11 +3,14 @@ import "./App.css";
 import { useEffect, useState } from "react";
 function App() {
   const [data, setData] = useState();
-  useEffect(async () => {
-    const res = await fetch(`${process.env.REACT_APP_BASE_URL}/users`);
-    console.log(res);
-    const text = await res.text();
-    setData(text);
+  useEffect(() => {
+    const demo = async () => {
+      const res = await fetch(`${process.env.REACT_APP_BASE_URL}/users`);
+      console.log(res);
+      const text = await res.text();
+      setData(text);
+    }
+    demo();
   }, []);
   return (
     <div className="App">
