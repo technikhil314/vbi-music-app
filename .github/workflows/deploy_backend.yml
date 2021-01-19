@@ -15,6 +15,4 @@ jobs:
         run: git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/visual-bi-music-app.git
 
       - name: Deploy backend to heroku
-        run: |
-          cd vbi-backend
-          git push --force heroku `git subtree split --prefix vbi-backend HEAD`:refs/heads/master
+        run: git push --force heroku `git subtree split --prefix vbi-backend HEAD`:refs/heads/master
