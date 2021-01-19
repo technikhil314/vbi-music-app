@@ -12,13 +12,9 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Add remote origin
-        run: |
-          cd vbi-backend
-          git init
-          git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/visual-bi-music-app.git
+        run: git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/visual-bi-music-app.git
 
       - name: Deploy backend to heroku
         run: |
           cd vbi-backend
-          git push --force heroku master
-
+          git push --force heroku `git subtree split --prefix vbi-backend HEAD`:refs/heads/master
