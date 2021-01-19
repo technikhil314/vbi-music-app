@@ -29,18 +29,18 @@ The app is divided in two main parts
 
 ### Front end
 
-    1. open terminal
-    1. cd vbi-ui
-    1. npm ci
-    1. Create .env file and add proper content to it
-    1. npm start
-    1. front end will start running on port http://localhost:3000
+1. open terminal
+1. cd vbi-ui
+1. npm ci
+1. Create .env file and add proper content to it
+1. npm start
+1. front end will start running on port http://localhost:3000
 
 ### back end
 
-    1. open terminal
-    1. cd vbi-backend
-    1. npm ci
-    1. Create .env file and add proper content to it
-    1. npm start
-    1. back end will start running on http://localhost:2000
+1. open terminal
+1. cd vbi-backend
+1. npm ci
+1. Create .env file and add proper content to it
+1. npm start
+1. back end will start running on http://localhost:2000
