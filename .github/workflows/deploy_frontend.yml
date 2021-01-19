@@ -26,7 +26,11 @@ jobs:
           yarn build
 
       - name: Install netlify-cli
-        run: npm install netlify-cli
+        run: |
+          cd vbi-ui
+          npm install netlify-cli
 
       - name: Deploy to netlify
-        run: npx netlify deploy --site 75c91364-611d-499a-9cfb-b9506c82b3c7 --dir build --auth ${{secrets.NETLIFY_AUTH_TOKEN}} --prod
+        run: |
+          cd vbi-ui
+          npx netlify deploy --site 75c91364-611d-499a-9cfb-b9506c82b3c7 --dir build --auth ${{secrets.NETLIFY_AUTH_TOKEN}} --prod
