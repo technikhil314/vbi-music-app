@@ -1,4 +1,5 @@
 let express = require('express');
+let cors = require('cors')
 let session = require('express-session')
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
@@ -6,10 +7,14 @@ let logger = require('morgan');
 let indexRouter = require('../routes/index');
 let usersRouter = require('../routes/users');
 
-let app = express();
+let app = express({
+  origin: ["http://localhost:3000", "https://vbi-ui.netlify.app"],
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+});
 
 app.use(logger('dev'));
 app.set('trust proxy', 1);
+app.use(cors())
 app.use(session({
   store: new (require('connect-pg-simple')(session))({
     conObject: {
