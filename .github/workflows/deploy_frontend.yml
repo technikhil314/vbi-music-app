@@ -1,0 +1,32 @@
+name: deploy_netlify
+
+on:
+  push:
+    branches: 
+      - main
+
+jobs:
+  build:
+    name: Deploy to
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+
+      - name: Build
+        run: |
+          cd vbi-ui
+          echo REACT_APP_BASE_URL=https://visual-bi-music-app.herokuapp.com > .env
+          yarn --frozen-lockfile
+          yarn build
+
+      - name: Install netlify-cli
+        run: npm install netlify-cli
+
+      - name: Deploy to netlify
+        run: npx netlify deploy --site 75c91364-611d-499a-9cfb-b9506c82b3c7 --dir build --auth ${{secrets.NETLIFY_AUTH_TOKEN}} --prod
