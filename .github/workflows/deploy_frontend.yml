@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: Deploy to
+    name: Deploy to https://vbi-ui.netlify.app
     runs-on: ubuntu-latest
 
     steps:
