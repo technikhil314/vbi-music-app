@@ -1,7 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
-
+import logo from "./logo.svg";
+import "./App.css";
+import { useEffect, useState } from "react";
 function App() {
+  const [data, setData] = useState();
+  useEffect(async () => {
+    const res = await fetch(`${process.env.REACT_APP_BASE_URL}/users`);
+    console.log(res);
+    const text = await res.text();
+    setData(text);
+  }, []);
   return (
     <div className="App">
       <header className="App-header">
@@ -15,7 +22,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          {data || "Learn React"}
         </a>
       </header>
     </div>
