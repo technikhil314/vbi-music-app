@@ -1,6 +1,5 @@
 const { DataTypes } = require("sequelize");
 const db = require("../startup/db");
-
 const model = db.define(
     "song",
     {
@@ -8,18 +7,15 @@ const model = db.define(
             type: DataTypes.BIGINT,
             allowNull: false,
             primaryKey: true,
+            autoIncrement: true,
         },
-        firstName: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        lastName: {
+        title: {
             type: DataTypes.STRING,
             allowNull: false
         },
         image: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
         genre: {
             type: DataTypes.TEXT,
@@ -40,4 +36,16 @@ async function create() {
     return model.create();
 }
 
-module.exports = { create };
+async function getAll() {
+    const {
+        songAlbum,
+        songArtist,
+        songPlaylist,
+        playlistUser
+    } = require("./relations");
+    return await model.findAll({
+        include: songAlbum
+    });
+}
+
+module.exports = { getAllSongs: getAll, createSong: create, song: model };

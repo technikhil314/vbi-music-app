@@ -2,13 +2,12 @@ const { DataTypes } = require("sequelize");
 const db = require("../startup/db");
 
 const model = db.define(
-    "artist",
+    "user",
     {
         id: {
-            type: DataTypes.BIGINT,
+            type: DataTypes.STRING,
             allowNull: false,
-            primaryKey: true,
-            autoIncrement: true,
+            primaryKey: true
         },
         firstName: {
             type: DataTypes.STRING,
@@ -18,13 +17,17 @@ const model = db.define(
             type: DataTypes.STRING,
             allowNull: true
         },
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         image: {
             type: DataTypes.STRING,
             allowNull: true
         }
     },
     {
-        tableName: "Artist",
+        tableName: "User",
         timestamps: true,
         createdAt: true,
         updatedAt: true,
@@ -33,11 +36,17 @@ const model = db.define(
 );
 model.sync({ alter: true });
 
-async function create() {
-    return model.create();
+async function create({ userId, firstName, lastName, image, email }) {
+    return await model.create({
+        id: userId,
+        firstName,
+        lastName,
+        email,
+        image
+    });
 }
-async function getAll() {
-    return await model.findAll();
+async function getById(userId) {
+    return await model.findByPk(userId)
 }
 
-module.exports = { getAllArtists: getAll, createArtist: create, artist: model };
+module.exports = { getUserById: getById, createUser: create, user: model };

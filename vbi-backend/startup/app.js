@@ -4,10 +4,10 @@ let session = require('express-session')
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 
-let indexRouter = require('../routes/index');
-let usersRouter = require('../routes/users');
-
 let app = express();
+const router = require("./routes");
+require("./db");
+require("../models/relations");
 
 app.use(logger('dev'));
 app.set('trust proxy', 1);
@@ -34,7 +34,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+router(app);
 
 module.exports = app;
