@@ -8,7 +8,7 @@ let app = express();
 const router = require("./routes");
 require("./db");
 require("../models/relations");
-
+let seedData = require("./seedData");
 app.use(logger('dev'));
 app.set('trust proxy', 1);
 app.use(cors({
@@ -35,5 +35,5 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 router(app);
-
+seedData();
 module.exports = app;

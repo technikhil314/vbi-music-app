@@ -4,18 +4,12 @@ let express = require('express');
 let router = express.Router();
 const { artist } = require("../models/artists");
 const { album } = require("../models/albums");
-const { getAllSongs } = require("../models/songs");
-router.post('/create', async function (req, res, next) {
-  const allSongs = await getAllSongs({
-    include: [album]
-  });
-  res.send(JSON.stringify(allSongs));
-});
+const { getAllSongs, createSong } = require("../models/songs");
+
 router.get('/all', async function (req, res, next) {
-  const allSongs = await getAllSongs({
-    include: [album, artist]
-  });
-  res.send(JSON.stringify(allSongs));
+  const allSongs = await getAllSongs();
+  console.log(JSON.stringify(allSongs, null, 2));
+  res.send(JSON.stringify(allSongs, null, 2));
 });
 
 module.exports = router;

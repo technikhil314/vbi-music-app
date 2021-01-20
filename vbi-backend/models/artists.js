@@ -33,8 +33,8 @@ const model = db.define(
 );
 model.sync({ alter: true });
 
-async function create() {
-    return model.create();
+async function create(data) {
+    return model.create(data);
 }
 async function getAll() {
     return await model.findAll();
