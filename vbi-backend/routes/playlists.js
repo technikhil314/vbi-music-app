@@ -2,7 +2,7 @@ let express = require('express');
 let router = express.Router();
 const { getAllPlaylists, createPlaylist, getPlaylistByPk } = require("../models/playlists");
 const auth = require("../middlewares/auth");
-const checkUserInDB = require("../middlewares/checkUserInDB");
+const checkUserInDB = require("../middlewares/checkUserInDb");
 
 router.post('/create', auth, checkUserInDB, async function (req, res) {
     await createPlaylist({
