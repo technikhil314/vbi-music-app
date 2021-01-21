@@ -14,6 +14,7 @@ The app is divided in two main parts
 - zustand - state management
 - normalise.css - css
 - react-bootstrap - component library
+- react-router-dom - client side routing
 
 2. Back end
 
