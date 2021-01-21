@@ -34,7 +34,10 @@ async function create(data) {
 }
 
 async function getAll() {
-    return await model.findAll();
+    const { song } = require("./songs");
+    return await model.findAll({
+        include: song
+    });
 }
 
 

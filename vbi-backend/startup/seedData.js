@@ -1,4 +1,4 @@
-const { createSong } = require("../models/songs");
+const { createSong, song } = require("../models/songs");
 const { createAlbum } = require("../models/albums");
 const { createArtist } = require("../models/artists");
 
@@ -182,13 +182,15 @@ const artists = [{
 
 let album;
 module.exports = async function () {
-    for (let i = 0; i < songs.length; i++) {
-        if (i % 5 === 0) {
-            album = await createAlbum(albums[Math.floor(i / 5)]);
+    const isSeedData = await song.findByPk(1);
+    if (!isSeedData)
+        for (let i = 0; i < songs.length; i++) {
+            if (i % 5 === 0) {
+                album = await createAlbum(albums[Math.floor(i / 5)]);
+            }
+            const song = await createSong(songs[i]);
+            const artist = await createArtist(artists[i])
+            await album.addSong(song);
+            await song.addArtist(artist);
         }
-        const song = await createSong(songs[i]);
-        const artist = await createArtist(artists[i])
-        await album.addSong(song);
-        await song.addArtist(artist);
-    }
 }

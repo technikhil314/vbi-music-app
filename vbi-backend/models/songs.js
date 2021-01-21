@@ -1,7 +1,5 @@
 const { DataTypes } = require("sequelize");
 const db = require("../startup/db");
-const { album } = require("./albums");
-const { artist } = require("./artists");
 const model = db.define(
     "song",
     {
@@ -39,6 +37,8 @@ async function create(data) {
 }
 
 async function getAll() {
+    const { album } = require("./albums");
+    const { artist } = require("./artists");
     return await model.findAll({
         include: [album, artist]
     });

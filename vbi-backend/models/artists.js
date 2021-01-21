@@ -37,7 +37,10 @@ async function create(data) {
     return model.create(data);
 }
 async function getAll() {
-    return await model.findAll();
+    const { song } = require("./songs");
+    return await model.findAll({
+        include: song
+    });
 }
 
 module.exports = { getAllArtists: getAll, createArtist: create, artist: model };

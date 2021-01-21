@@ -1,11 +1,10 @@
-
 let express = require('express');
 let router = express.Router();
-const { getAllSongs } = require("../models/songs");
+const { getAllArtists } = require("../models/artists");
 
 router.get('/all', async function (req, res) {
-  const allSongs = await getAllSongs();
-  res.send(JSON.stringify(allSongs, null, 2));
+    const all = await getAllArtists();
+    res.send(JSON.stringify(all, null, 2));
 });
 
 module.exports = router;

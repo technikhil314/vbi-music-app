@@ -1,24 +1,38 @@
-import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import "./App.css";
 import { useApi } from "./hooks/useApi";
-import logo from "./logo.svg";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
 function App() {
   const { isAuthenticated, loginWithRedirect } = useAuth0();
   console.log(isAuthenticated);
   const { loading, data } = useApi(
-    `${process.env.REACT_APP_BASE_URL}/api/songs/all`
+    `${process.env.REACT_APP_BASE_URL}/api/playlists/all`
   );
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <button onClick={loginWithRedirect}>
-          {!isAuthenticated && !loading && "Not authenticated"}
-          {isAuthenticated && loading && !data && "Loading..."}
-          {isAuthenticated && !loading && data && data.message}
-        </button>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Route path="/public">
+          <h1>Public Playlists</h1>
+        </Route>
+        <Route path="/login">
+          <h1>Public Playlists</h1>
+        </Route>
+        <Route
+          path="/protected"
+          component={withAuthenticationRequired(
+            () => (
+              <div>Protected</div>
+            ),
+            {
+              onRedirecting: () => (
+                <div>Redirecting you to the login page...</div>
+              ),
+            }
+          )}
+        ></Route>
+      </div>
+    </Router>
   );
 }
 

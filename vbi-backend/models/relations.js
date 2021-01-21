@@ -12,10 +12,10 @@ async function createRelations() {
     song.belongsToMany(album, { through: 'SongAlbum' });
     song.belongsToMany(artist, { through: 'SongArtist' });
     song.belongsToMany(playlist, { through: 'SongPlaylist' });
-    db.sync();
 
     playlist.belongsTo(user, { as: 'User' });
-    playlist.sync({ alter: true });
+    db.sync({ force: true });
+    playlist.sync({ force: true });
 }
 
 createRelations();

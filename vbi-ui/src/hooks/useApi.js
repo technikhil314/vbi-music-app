@@ -37,7 +37,7 @@ export const useApi = (url, fetchOptions = {}) => {
                 });
             }
         })();
-    }, [refreshIndex, isAuthenticated, fetchOptions, getAccessTokenSilently, state, url]);
+    }, [isAuthenticated]);
 
     return {
         ...state,

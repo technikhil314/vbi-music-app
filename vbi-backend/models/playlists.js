@@ -1,4 +1,5 @@
 const { DataTypes } = require("sequelize");
+const { song } = require("./songs");
 const db = require("../startup/db");
 
 const model = db.define(
@@ -29,14 +30,23 @@ const model = db.define(
 );
 model.sync({ alter: true });
 
-async function create(data) {
-    return model.create(data);
+async function create(data, songs) {
+    const [playlist, songs] = Promise.all([
+        model.create(data), song.findAll({
+            where: {
+                id: Array.isArray(songs) ? songs : [songs]
+            }
+        })
+    ]);
+    songs.forEach(selectedSong => playlist.addSongs(selectedSong));
 }
 
 async function getAll(userId) {
     return await model.findAll({
-
-    });
+        where: {
+            UserId: userId,
+        }
+    })
 }
 
 module.exports = { getAllPlaylists: getAll, createPlaylist: create, playlist: model };
