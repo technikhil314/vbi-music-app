@@ -54,6 +54,7 @@ function App() {
       });
       Cookies.remove("loggedIn", { path: "" });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated, isLoading]);
   return (
     <Router>

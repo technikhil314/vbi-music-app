@@ -15,13 +15,11 @@ router.post('/create', auth, checkUserInDB, async function (req, res) {
 });
 
 router.get('/all', auth, checkUserInDB, async function (req, res) {
-    console.log(req.user);
     const all = await getAllPlaylists(req.user.sub);
     res.send(JSON.stringify(all, null, 2));
 });
 
 router.get('/:id', auth, checkUserInDB, async function (req, res) {
-    console.log(req.user);
     const playlist = await getPlaylistByPk(req.params.id);
     res.send(JSON.stringify(playlist, null, 2));
 });

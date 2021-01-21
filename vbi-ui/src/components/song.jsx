@@ -2,7 +2,11 @@ export const Song = ({ song }) => {
   return (
     <article className="row mb-2 align-items-center">
       <div className="col-1">
-        <img src={`${song.image}/200x200`} className="songImage"></img>
+        <img
+          src={`${song.image}/200x200`}
+          className="songImage"
+          alt="song"
+        ></img>
       </div>
       <div className="col-11">
         <header className="font-weight-bolder">{song.title}</header>

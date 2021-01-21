@@ -4,7 +4,7 @@ import { withAuthenticationRequiredOptions } from "../util";
 import withAuthenticationRequired from "./withAuthenticationRequired";
 const Playlist = (params) => {
   const { id } = useParams();
-  const { loading, data } = useApi(
+  const { data } = useApi(
     `${process.env.REACT_APP_BASE_URL}/api/playlists/${id}`
   );
   if (!data) {
