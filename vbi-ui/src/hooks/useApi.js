@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 
-export const useApi = (url, fetchOptions = {}) => {
+const useApi = (url, fetchOptions = {}) => {
     const { isAuthenticated, getAccessTokenSilently } = useAuth0();
     const [state, setState] = useState({
         error: null,
@@ -44,3 +44,5 @@ export const useApi = (url, fetchOptions = {}) => {
         refresh: () => setRefreshIndex(refreshIndex + 1),
     };
 };
+
+export default useApi;

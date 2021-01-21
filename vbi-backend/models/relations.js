@@ -14,8 +14,8 @@ async function createRelations() {
     song.belongsToMany(playlist, { through: 'SongPlaylist' });
 
     playlist.belongsTo(user, { as: 'User' });
-    db.sync({ force: true });
-    playlist.sync({ force: true });
+    db.sync({ alter: true });
+    playlist.sync({ alter: true });
 }
 
 createRelations();

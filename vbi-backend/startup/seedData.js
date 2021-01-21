@@ -183,7 +183,7 @@ const artists = [{
 let album;
 module.exports = async function () {
     const isSeedData = await song.findByPk(1);
-    if (!isSeedData)
+    if (!isSeedData) {
         for (let i = 0; i < songs.length; i++) {
             if (i % 5 === 0) {
                 album = await createAlbum(albums[Math.floor(i / 5)]);
@@ -193,4 +193,5 @@ module.exports = async function () {
             await album.addSong(song);
             await song.addArtist(artist);
         }
+    }
 }

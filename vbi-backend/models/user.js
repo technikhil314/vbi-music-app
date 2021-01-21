@@ -9,22 +9,14 @@ const model = db.define(
             allowNull: false,
             primaryKey: true
         },
-        firstName: {
+        name: {
             type: DataTypes.STRING,
             allowNull: false
-        },
-        lastName: {
-            type: DataTypes.STRING,
-            allowNull: true
         },
         email: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        image: {
-            type: DataTypes.STRING,
-            allowNull: true
-        }
     },
     {
         tableName: "User",
@@ -36,13 +28,11 @@ const model = db.define(
 );
 model.sync({ alter: true });
 
-async function create({ userId, firstName, lastName, image, email }) {
+async function create({ userId, name, email }) {
     return await model.create({
         id: userId,
-        firstName,
-        lastName,
+        name,
         email,
-        image
     });
 }
 async function getById(userId) {
