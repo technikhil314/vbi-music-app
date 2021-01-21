@@ -60,7 +60,7 @@ function App() {
     <Router>
       <Navbar bg="light" expand="lg" fixed="top">
         <Navbar.Brand href="/" className="font-weight-bolder">
-          Musiclicious
+          Musilicious
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
